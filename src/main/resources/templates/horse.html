@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <meta charset="utf-8"/>
+    <title>Horse Page</title>
+</head>
+<body>
+<div align="center">
+    <h1>Horse List</h1>
+
+
+    <a class="btn btn-outline-primary" th:href="@{/horse/new}">
+        Добавить лошадь
+    </a>
+
+    <br/><br/>
+    <table class="table">
+        <thead class="table-light">
+        <tr>
+            <th scope="col">Кличка</th>
+            <th scope="col">Тип</th>
+            <th scope="col">Возраст</th>
+            <th scope="col">Цена</th>
+            <th scope="col">Действие</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="horse : ${horses}">
+            <td scope="row" th:text="${horse.name}">Кличка</td>
+            <td scope="row" th:text="${horse.type}">Тип</td>
+            <td scope="row" th:text="${horse.age}">Возраст
+            </td>
+            <td scope="row" th:text="${horse.price}">Цена
+            </td>
+            <td scope="row">
+                <a th:href="@{/horse/update/{id}(id=${horse.id})}" class="btn btn-outline-primary">Изменить</a>
+                &nbsp;&nbsp;&nbsp;
+                <a th:href="@{/horse/delete/{id}(id=${horse.id})}" class="btn btn-outline-primary">Удалить</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

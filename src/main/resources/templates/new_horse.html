@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1"/>
+    <title>Create New Product</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <center>
+        <h1>Добавить лошадь</h1>
+        <br/>
+        <form name="add" th:action="@{/horse}" th:object="${horse}"
+              method="post" autocomplete="off">
+            Кличка <input type="text" id="name" pattern="^[a-zA-Z]+$" th:field="*{name}"
+                          class="form-control mb-4 col-4">
+            Парода <input type="text" id="type" pattern="^[a-zA-Z]+$" th:field="*{type}"
+                          class="form-control mb-4 col-4">
+            Возраст <input type="text" id="age" pattern="^[0-9]+$" th:field="*{age}" class="form-control mb-4 col-4">
+            Цена<input type="text" id="price" pattern="^[0-9]+$" th:field="*{price}" class="form-control mb-4 col-4">
+            <button type="submit" class="btn btn-info col-2 ">Добавить</button>
+        </form>
+        <hr>
+    </center>
+</div>
+<a th:href="@{/horse}" class="btn btn-info col-2">К списку лошадей</a>
+</body>
+
+<script>
+    const age = document.getElementById("age");
+    const price = document.getElementById("price");
+    const name = document.getElementById("name")
+    const type = document.getElementById("type")
+
+
+    age.addEventListener("input", function (event) {
+        if (age.validity.patternMismatch) {
+            age.setCustomValidity("Используйте числовой формат");
+        } else {
+            age.setCustomValidity("")
+        }
+    });
+
+
+    price.addEventListener("input", function (event) {
+        if (price.validity.patternMismatch) {
+            price.setCustomValidity("Используйте числовой формат");
+        } else {
+            price.setCustomValidity("")
+        }
+    });
+
+    type.addEventListener("input", function (event) {
+        if (type.validity.patternMismatch) {
+            type.setCustomValidity("Можно использовать только буквы");
+        } else {
+            type.setCustomValidity("")
+        }
+    });
+
+    name.addEventListener("input", function (event) {
+        if (name.validity.patternMismatch) {
+            name.setCustomValidity("Можно использовать только буквы");
+        } else {
+            name.setCustomValidity("")
+        }
+    });
+
+
+</script>
+</html>
