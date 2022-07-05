@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Изменить лошадь</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+<nav class="navbar navbar-light bg-light">
+    <form class="form-inline">
+        <a class="btn btn-outline-primary" th:href="@{/}">Главная</a>
+        <a class="btn btn-outline-primary" th:href="@{/horse}">К лошадям</a>
+    </form>
+</nav>
+<div class="container">
+    <center>
+        <h2>Изменить лошадь</h2>
+
+        <form th:action="@{/horse}" th:object="${horse}" method="post" autocomplete="off">
+
+            <input type="hidden" th:field="*{id}"/>
+            Кличка <input id="name" type="text" pattern="^[a-zA-Zа-яА-Я]+$" required th:field="*{name}"
+                          class="form-control mb-4 col-4">
+            <div class="form-group">
+                <label th:for="type">Парода</label>
+                <select th:field="*{type}">
+                    <option th:each="horseT:${types}"
+                            th:text="${horseT.name}"
+                            th:value="${horseT}"></option>
+                </select>
+            </div>
+            Возраст <input id="age" type="text" pattern="^[0-9]+$" required th:field="*{age}"
+                           class="form-control mb-4 col-4">
+            Цена <input id="price" type="text" pattern="^[0-9]+$" required th:field="*{price}"
+                        class="form-control mb-4 col-4">
+            <button type="submit" class="btn btn-info col-2">Редактировать</button>
+
+        </form>
+        <hr>
+    </center>
+</div>
+<a th:href="@{/horse}" class="btn btn-info col-2">К списку лошадей</a>
+</body>
+<script>
+    const age = document.getElementById("age");
+    const price = document.getElementById("price");
+    const name = document.getElementById("name")
+
+
+    age.addEventListener("input", function (event) {
+        if (age.validity.patternMismatch) {
+            age.setCustomValidity("Используйте числовой формат");
+        } else {
+            age.setCustomValidity("")
+        }
+    });
+
+
+    price.addEventListener("input", function (event) {
+        if (price.validity.patternMismatch) {
+            price.setCustomValidity("Используйте числовой формат");
+        } else {
+            price.setCustomValidity("")
+        }
+    });
+
+    name.addEventListener("input", function (event) {
+        if (name.validity.patternMismatch) {
+            name.setCustomValidity("Можно использовать только буквы");
+        } else {
+            name.setCustomValidity("")
+        }
+    });
+
+
+</script>
+</html>
