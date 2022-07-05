@@ -8,18 +8,33 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
+<nav class="navbar navbar-light bg-light">
+    <form class="form-inline">
+        <a class="btn btn-outline-primary" th:href="@{/}">Главная</a>
+        <a class="btn btn-outline-primary" th:href="@{/horse}">К лошадям</a>
+    </form>
+</nav>
 <div class="container">
     <center>
         <h1>Добавить лошадь</h1>
         <br/>
         <form name="add" th:action="@{/horse}" th:object="${horse}"
               method="post" autocomplete="off">
-            Кличка <input type="text" id="name" pattern="^[a-zA-Z]+$" th:field="*{name}"
+            Кличка <input type="text" id="name" pattern="^[a-zA-Zа-яА-Я]+$" required th:field="*{name}"
                           class="form-control mb-4 col-4">
-            Парода <input type="text" id="type" pattern="^[a-zA-Z]+$" th:field="*{type}"
-                          class="form-control mb-4 col-4">
-            Возраст <input type="text" id="age" pattern="^[0-9]+$" th:field="*{age}" class="form-control mb-4 col-4">
-            Цена<input type="text" id="price" pattern="^[0-9]+$" th:field="*{price}" class="form-control mb-4 col-4">
+
+            <div class="form-group">
+                <label th:for="type">Парода</label>
+                <select th:field="*{type}">
+                    <option th:each="horseT:${types}"
+                            th:text="${horseT.name}"
+                            th:value="${horseT}"></option>
+                </select>
+            </div>
+            Возраст <input type="text" id="age" pattern="^[0-9]+$" required th:field="*{age}"
+                           class="form-control mb-4 col-4">
+            Цена<input type="text" id="price" pattern="^[0-9]+$" required th:field="*{price}"
+                       class="form-control mb-4 col-4">
             <button type="submit" class="btn btn-info col-2 ">Добавить</button>
         </form>
         <hr>

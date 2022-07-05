@@ -1,9 +1,11 @@
-package com.example.horse.repository.Entity;
+package com.example.horse.Entity;
 
+import com.example.horse.Enum.TypeEnum;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -22,11 +24,12 @@ public class Horse implements Serializable {
     private String name;
 
     @Column(name = "horse_type")
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private TypeEnum type;
 
     @Column(name = "horse_age")
-    private String age;
+    private Integer age;
 
     @Column(name = "horse_price")
-    private String price;
+    private BigDecimal price;
 }

@@ -13,8 +13,8 @@
                 id          int auto_increment not null,
                 horse_name  varchar(255) null,
                 horse_type  varchar(255) null,
-                horse_age   varchar(255) null,
-                horse_price varchar(255) null,
+                horse_age   INT (255) null,
+                horse_price DECIMAL(65) null,
                 constraint horse_pk
                     primary key (id)
             )

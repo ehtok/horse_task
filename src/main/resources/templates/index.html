@@ -8,6 +8,12 @@
     <title>Главная страница</title>
 </head>
 <body>
-<a class="btn btn-outline-primary" th:href="@{/horse}">К лошодям</a>
+<nav class="navbar navbar-light bg-light">
+    <form class="form-inline">
+        <a class="btn btn-outline-primary" th:href="@{/}">Главная</a>
+        <a class="btn btn-outline-primary" th:href="@{/horse}">К лошадям</a>
+    </form>
+</nav>
+
 </body>
 </html>

@@ -8,22 +8,40 @@
     <title>Horse Page</title>
 </head>
 <body>
+<nav class="navbar navbar-light bg-light">
+    <form class="form-inline">
+        <a class="btn btn-outline-primary" th:href="@{/}">Главная</a>
+        <a class="btn btn-outline-primary" th:href="@{/horse}">К лошадям</a>
+    </form>
+</nav>
 <div align="center">
     <h1>Horse List</h1>
 
-
-    <a class="btn btn-outline-primary" th:href="@{/horse/new}">
-        Добавить лошадь
-    </a>
+    <div class="row">
+        <center>
+            <div class="col-lg-6">
+                <a class="btn btn-outline-primary" th:href="@{/horse/new}">
+                    Добавить лошадь
+                </a>
+                <a class="btn btn-outline-primary" th:href="@{/horse/search}">Поиск
+                </a>
+            </div>
+        </center>
+    </div>
 
     <br/><br/>
     <table class="table">
         <thead class="table-light">
         <tr>
-            <th scope="col">Кличка</th>
-            <th scope="col">Тип</th>
-            <th scope="col">Возраст</th>
-            <th scope="col">Цена</th>
+            <th scope="col"><a
+                    th:href="@{'/horse/page/'+${currentPage} +'/name?sortDir=' + ${reverseSortDir}}">Кличка</a></th>
+            <th scope="col"><a th:href="@{' /horse/page/'+${currentPage}+'/type?sortDir=' + ${reverseSortDir}}">Тип</a>
+            </th>
+            <th scope="col"><a
+                    th:href="@{'/horse/page/'+ ${currentPage}+'/age?sortDir=' + ${reverseSortDir}}">Возраст</a></th>
+            <th scope="col"><a
+                    th:href="@{'/horse/page/'+${currentPage}+'/price?sortDir=' + ${reverseSortDir}}">Цена</a>
+            </th>
             <th scope="col">Действие</th>
         </tr>
         </thead>
@@ -43,6 +61,41 @@
         </tr>
         </tbody>
     </table>
+    <footer class="panel-footer">
+        <nav>
+            Total horses [[${totalHorses}]]: Page [[${currentPage}]] of [[${totalPage}]]
+            <ul class="pagination">
+
+                <li class="page-item">
+                    <a class="page-link" th:if="${currentPage > 1}" th:href="@{/horse/page/1}">First</a>
+                    <span class="page-link" th:unless="${currentPage > 1}">First</span>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link" th:if="${currentPage > 1}" th:href="@{'/horse/page/' + ${currentPage - 1}}">Previous</a>
+                    <span class="page-link" th:unless="${currentPage > 1}">Previous</span>
+                </li>
+
+                <li class="page-link">
+                <span th:each="i :${#numbers.sequence(1,totalPage)}">
+                <a th:href="@{'/horse/page/' + ${i} }">[[${i}]]</a>
+                </span>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link" th:if="${currentPage < totalPage}"
+                       th:href="@{'/horse/page/' + ${currentPage + 1}}">Next</a>
+                    <span class="page-link" th:unless="${currentPage < totalPage}">Next</span>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link" th:if="${currentPage < totalPage}" th:href="@{'/horse/page/' + ${totalPage}}">Last</a>
+                    <span class="page-link" th:unless="${currentPage < totalPage}">Last</span>
+                </li>
+            </ul>
+        </nav>
+    </footer>
 </div>
+
 </body>
 </html>

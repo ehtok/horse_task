@@ -9,7 +9,7 @@
         <comment>fill table horse</comment>
         <sql>
             insert into horse(horse_name, horse_type, horse_age, horse_price)
-            values ('Burka', 'Shire', '2', '2222')
+            values ('Burka', 'DRAFT', 2, 500)
         </sql>
     </changeSet>
 </databaseChangeLog>
